@@ -10,8 +10,9 @@ class Handwriting extends Component {
       isArtist: false,
       styles: {
       	backgroundColor: 'white',
-      	width: '64px',
-      	height: '64px',
+      	width: '100px',
+      	height: '100px',
+      	border: '1px solid black'
       },
       btn: {
       	border: '1px solid black',
@@ -28,14 +29,14 @@ class Handwriting extends Component {
 		console.log(image)
 		canvas[0].width = canvas[0].width
 		Axios.post('/api/predict', { image })
-		.then(response => console.log(response))
+		.then(response => console.log(response.data.image))
 		.catch(err => console.log(err))
 	}
 
 	render = () => {
 		return (
 			<div>
-				<div>Sketch a letter!</div>
+				<div>Sketch a Number!</div>
 				<div className="drawing" style={this.state.styles}> 
 					<DrawableCanvas
 						className="sketch"
