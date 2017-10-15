@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import DrawableCanvas from 'react-drawable-canvas'
+import Axios from 'axios'
 
 class Handwriting extends Component {
 	constructor(props) {
@@ -26,6 +27,9 @@ class Handwriting extends Component {
 		let image = canvas[0].toDataURL('image/png')
 		console.log(image)
 		canvas[0].width = canvas[0].width
+		Axios.post('/api/predict', { image })
+		.then(response => console.log(response))
+		.catch(err => console.log(err))
 	}
 
 	render = () => {
