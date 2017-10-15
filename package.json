@@ -8,7 +8,7 @@
   },
   "scripts": {
     "compile": "webpack --watch",
-    "start": "python MLService.py"
+    "start": "python server/MLService.py"
   },
   "author": "",
   "license": "ISC",
