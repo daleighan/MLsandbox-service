@@ -8,11 +8,10 @@ def index():
 
 @app.route("/api/predict", methods=['POST'])
 def predict():
-	print('hello')
 	if not request.json or not 'image' in request.json:
 		abort(400)
 	print(request.json)
-	return jsonify({ 'response': 'hello'}), 201
+	return jsonify({ 'image': request.json["image"] }), 201
 
 
 if __name__ == "__main__":
