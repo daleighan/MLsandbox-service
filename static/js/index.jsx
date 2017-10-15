@@ -10,9 +10,19 @@ class Handwriting extends Component {
       styles: {
       	backgroundColor: 'white',
       	width: '64px',
-      	height: '64px'
+      	height: '64px',
+      },
+      btn: {
+      	border: '1px solid black',
+      	width: '120px',
+      	padding: '3px',
+      	textAlign: 'center'
       }
     }
+	}
+
+	getImage = (e) => {
+		console.log('pressed');
 	}
 
 	render = () => {
@@ -23,9 +33,10 @@ class Handwriting extends Component {
 					<DrawableCanvas
 						id="sketch"
 						brushColor="black"
+						lineWidth={8}
 					/>
 				</div>
-				<div>Get Prediction</div>
+				<div onClick={this.getImage} style={this.state.btn}>Get Prediction</div>
 			</div>
 		)
 	}

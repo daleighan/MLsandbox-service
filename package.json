@@ -1,5 +1,5 @@
 {
-  "name": "handwriting",
+  "name": "handwriting recognition",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
@@ -10,7 +10,7 @@
     "compile": "webpack --watch",
     "start": "python server/MLService.py"
   },
-  "author": "",
+  "author": "Alex Leigh",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
@@ -23,7 +23,6 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-drawable-canvas": "^1.1.0",
-    "react-sketch": "^0.3.3",
     "webpack": "^3.7.1"
   }
 }
