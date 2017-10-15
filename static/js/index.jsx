@@ -25,6 +25,7 @@ class Handwriting extends Component {
 		let canvas = document.getElementsByTagName('canvas')
 		let image = canvas[0].toDataURL('image/png')
 		console.log(image)
+		canvas[0].width = canvas[0].width
 	}
 
 	render = () => {
