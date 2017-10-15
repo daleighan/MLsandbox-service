@@ -21,8 +21,10 @@ class Handwriting extends Component {
     }
 	}
 
-	getImage = (e) => {
-		console.log('pressed');
+	getPrediction = (e) => {
+		let canvas = document.getElementsByTagName('canvas')
+		let image = canvas[0].toDataURL('image/png')
+		console.log(image)
 	}
 
 	render = () => {
@@ -31,12 +33,12 @@ class Handwriting extends Component {
 				<div>Sketch a letter!</div>
 				<div className="drawing" style={this.state.styles}> 
 					<DrawableCanvas
-						id="sketch"
+						className="sketch"
 						brushColor="black"
 						lineWidth={8}
 					/>
 				</div>
-				<div onClick={this.getImage} style={this.state.btn}>Get Prediction</div>
+				<div onClick={this.getPrediction} style={this.state.btn}>Get Prediction</div>
 			</div>
 		)
 	}
