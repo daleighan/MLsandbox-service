@@ -45,11 +45,11 @@ class Handwriting extends Component {
 		return (
 			<div>
 				<div>Sketch a Number!</div>
-				<div className="drawing" style={this.state.styles}> 
+				<div className='drawing' style={this.state.styles}> 
 					<DrawableCanvas
-						className="sketch"
-						brushColor="grey"
-						lineWidth={1}
+						className='sketch'
+						brushColor='#D0D0D0'
+						lineWidth={0.5}
 				/>
 				</div>
 				<div onClick={this.getPrediction} style={this.state.btn}>Get Prediction</div>
