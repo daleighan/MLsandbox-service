@@ -42,8 +42,9 @@ def predict():
 	# Predict
 	predicted = classifier.predict(normaliizeImg.reshape((1,normaliizeImg.shape[0]*normaliizeImg.shape[1] )))
 	print(predicted)
+	to_send = predicted.tolist()[0]
 
-	return jsonify({ 'prediction': 'todo' }), 201
+	return jsonify({ 'prediction': to_send }), 201
 
 if __name__ == "__main__":
 	app.run()

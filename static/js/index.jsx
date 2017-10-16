@@ -42,7 +42,7 @@ class Handwriting extends Component {
 					<DrawableCanvas
 						className="sketch"
 						brushColor="grey"
-						lineWidth={0.1}
+						lineWidth={0.05}
 					/>
 				</div>
 				<div onClick={this.getPrediction} style={this.state.btn}>Get Prediction</div>
