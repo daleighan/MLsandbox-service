@@ -7,7 +7,6 @@ class Handwriting extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-      isArtist: false,
       styles: {
       	backgroundColor: 'black',
       	width: '400px',
