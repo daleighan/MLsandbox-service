@@ -4,6 +4,7 @@ from base64 import b64decode
 from numpy import min, max, floor, float, divide
 from scipy.misc import imread, imresize
 
+
 # Load in the digits dataset
 digits = datasets.load_digits()
 num_samples = len(digits.images)
@@ -37,7 +38,7 @@ def predict():
 	min_value = min(img)
 	max_value = max(img)
 	normalize_img = floor(divide((img - min_value).astype(float),(max_value - min_value).astype(float)) * 16)
-	
+	print(normalize_img)
 	predicted = classifier.predict(normalize_img.reshape((1,normalize_img.shape[0] * normalize_img.shape[1])))
 	to_send = predicted.tolist()[0]
 	return jsonify({ "prediction": to_send }), 201
