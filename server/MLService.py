@@ -34,6 +34,7 @@ def predict():
 	to_predict = imread('image.jpg')
 	to_predict = imresize(to_predict, (8, 8))
 	to_predict = to_predict[:, :, 0]
+	print(to_predict)
 	predicted = classifier.predict(to_predict.reshape(1, to_predict.shape[0] * to_predict.shape[1]))
 	print(predicted)
 	return jsonify({ 'prediction': 'todo' }), 201

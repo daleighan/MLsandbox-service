@@ -9,7 +9,7 @@ class Handwriting extends Component {
 		this.state = {
       isArtist: false,
       styles: {
-      	backgroundColor: 'white',
+      	backgroundColor: 'black',
       	width: '100px',
       	height: '100px',
       	border: '1px solid black'
@@ -41,8 +41,8 @@ class Handwriting extends Component {
 				<div className="drawing" style={this.state.styles}> 
 					<DrawableCanvas
 						className="sketch"
-						brushColor="black"
-						lineWidth={8}
+						brushColor="white"
+						lineWidth={1}
 					/>
 				</div>
 				<div onClick={this.getPrediction} style={this.state.btn}>Get Prediction</div>
