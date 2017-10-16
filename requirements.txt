@@ -11,7 +11,6 @@ networkx==2.0
 numpy==1.13.3
 olefile==0.44
 Pillow==4.3.0
-pyparsing==2.2.0
 python-dateutil==2.6.1
 pytz==2017.2
 PyWavelets==0.5.2
