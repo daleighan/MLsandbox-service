@@ -18,7 +18,9 @@ class Handwriting extends Component {
       	border: '1px solid black',
       	width: '120px',
       	padding: '3px',
-      	textAlign: 'center'
+      	textAlign: 'center',
+      	borderRadius: '5px',
+      	marginBottom: '3px'
       },
       currentPrediction: 'none'
     }
@@ -34,6 +36,11 @@ class Handwriting extends Component {
 		.catch(err => console.log(err))
 	}
 
+	clearCanvas = (e) => {
+		let canvas = document.getElementsByTagName('canvas')
+		canvas[0].width = canvas[0].width
+	}
+
 	render = () => {
 		return (
 			<div>
@@ -43,9 +50,10 @@ class Handwriting extends Component {
 						className="sketch"
 						brushColor="grey"
 						lineWidth={1}
-					/>
+				/>
 				</div>
 				<div onClick={this.getPrediction} style={this.state.btn}>Get Prediction</div>
+				<div onClick={this.clearCanvas} style={this.state.btn}>Clear the Canvas</div>
 				<div>Current Prediction: {this.state.currentPrediction} </div>
 			</div>
 		)
