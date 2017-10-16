@@ -34,11 +34,11 @@ def predict():
 	img = imresize(img, (8, 8))
 	img = img[:, :, 0]
 
-	minValueInImage = min(img)
-	maxValueInImage = max(img)
-	normaliizeImg = floor(divide((img - minValueInImage).astype(float),(maxValueInImage - minValueInImage).astype(float)) * 16)
-	# Predict
-	predicted = classifier.predict(normaliizeImg.reshape((1,normaliizeImg.shape[0] * normaliizeImg.shape[1])))
+	min_value = min(img)
+	max_value = max(img)
+	normalize_img = floor(divide((img - min_value).astype(float),(max_value - min_value).astype(float)) * 16)
+	
+	predicted = classifier.predict(normalize_img.reshape((1,normalize_img.shape[0] * normalize_img.shape[1])))
 	to_send = predicted.tolist()[0]
 	return jsonify({ "prediction": to_send }), 201
 
