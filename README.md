@@ -9,9 +9,11 @@ Handwriting is a simple web app that uses machine learning to identify what numb
 * SciKit Learn
 
 ### Startup
-This section is a work in progress. Install of python dependencies on machines other than my own is yet to be setup.
+* Install node if it is not already installed.
 * To install all node modules, run npm install.
-* To install all python dependencies, run pip install.
+* Install python3 if it is not already installed.
+* Install pip if it is not already installed.
+* To install all python dependencies, run pip install -r requirements.txt
 * Run npm run compile will bundle the react file.
 * Run npm start will start the flask server.
 * Go to http://127.0.0.1:5000/ to open the web app.
