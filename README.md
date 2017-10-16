@@ -9,6 +9,7 @@ Handwriting is a simple web app that uses machine learning to identify what numb
 * SciKit Learn
 
 ### Startup
+* Clone the repo from https://github.com/daleighan/Handwriting.git.
 * Install node if it is not already installed.
 * To install all node modules, run npm install.
 * Install python3 if it is not already installed.
