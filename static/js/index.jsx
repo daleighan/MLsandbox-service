@@ -10,8 +10,8 @@ class Handwriting extends Component {
       isArtist: false,
       styles: {
       	backgroundColor: 'black',
-      	width: '100px',
-      	height: '100px',
+      	width: '400px',
+      	height: '400px',
       	border: '1px solid black'
       },
       btn: {
@@ -19,18 +19,18 @@ class Handwriting extends Component {
       	width: '120px',
       	padding: '3px',
       	textAlign: 'center'
-      }
+      },
+      currentPrediction: 'none'
     }
 	}
 
 	getPrediction = (e) => {
 		let canvas = document.getElementsByTagName('canvas')
 		let image = canvas[0].toDataURL('image/png')
-		console.log(image)
 		let toSend = image.slice(22)
 		canvas[0].width = canvas[0].width
 		Axios.post('/api/predict', { image: toSend })
-		.then(response => console.log(response.data))
+		.then(response => this.setState({ currentPrediction: response.data.prediction }))
 		.catch(err => console.log(err))
 	}
 
@@ -42,10 +42,11 @@ class Handwriting extends Component {
 					<DrawableCanvas
 						className="sketch"
 						brushColor="grey"
-						lineWidth={0.05}
+						lineWidth={1}
 					/>
 				</div>
 				<div onClick={this.getPrediction} style={this.state.btn}>Get Prediction</div>
+				<div>Current Prediction: {this.state.currentPrediction} </div>
 			</div>
 		)
 	}
