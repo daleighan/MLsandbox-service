@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, abort, jsonify
 from sklearn import datasets, svm, metrics
 from scipy.misc import imread
+import base64
 
 # Load in the digits dataset
 digits = datasets.load_digits()
@@ -10,6 +11,7 @@ data = digits.images.reshape(num_samples, -1)
 classifier = svm.SVC(gamma = 0.001)
 # Fit the model to the numbers data
 classifier.fit(data[:num_samples], digits.target[:num_samples])
+
 
 
 # Instantiate the server
@@ -25,10 +27,11 @@ def index():
 def predict():
 	if not request.json or not 'image' in request.json:
 		abort(400)
-	print(imread(request.json["image"]))
-	#imread(request.json["image"], 'png')
-	return jsonify({ 'image': request.json["image"] }), 201
-
+	image_data = base64.b64decode(request.json["image"])
+	filename = 'image.jpg'
+	with open(filename, 'wb') as f:
+		f.write(image_data)
+	return jsonify({ 'prediction': 'todo' }), 201
 
 if __name__ == "__main__":
 	app.run()

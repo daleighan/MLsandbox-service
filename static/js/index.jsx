@@ -27,9 +27,10 @@ class Handwriting extends Component {
 		let canvas = document.getElementsByTagName('canvas')
 		let image = canvas[0].toDataURL('image/png')
 		console.log(image)
+		let toSend = image.slice(22)
 		canvas[0].width = canvas[0].width
-		Axios.post('/api/predict', { image })
-		.then(response => console.log(response.data.image))
+		Axios.post('/api/predict', { image: toSend })
+		.then(response => console.log(response.data))
 		.catch(err => console.log(err))
 	}
 
