@@ -1,3 +1,4 @@
 lib
 node_modules
 /static/dist/bundle.js
+MNIST_PICKLE.pkl

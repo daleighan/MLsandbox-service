@@ -3,16 +3,11 @@ from sklearn import datasets, svm, metrics
 from base64 import b64decode
 from numpy import min, max, floor, float, divide
 from scipy.misc import imread, imresize
+from sklearn.externals import joblib
 
 
-# Load in the digits dataset
-digits = datasets.load_digits()
-num_samples = len(digits.images)
-data = digits.images.reshape(num_samples, -1)
-# Create the model
-classifier = svm.SVC(gamma = 0.001)
-# Fit the model to the numbers data
-classifier.fit(data[:num_samples], digits.target[:num_samples])
+
+classifier = joblib.load('MNIST_PICKLE.pkl')
 
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
@@ -32,13 +27,12 @@ def predict():
 	with open(filename, "wb") as f:
 		f.write(image_data)
 	img = imread("image.jpg")
-	img = imresize(img, (8, 8))
+	img = imresize(img, (28, 28))
 	img = img[:, :, 0]
 
 	min_value = min(img)
 	max_value = max(img)
 	normalize_img = floor(divide((img - min_value).astype(float),(max_value - min_value).astype(float)) * 16)
-	print(normalize_img)
 	predicted = classifier.predict(normalize_img.reshape((1,normalize_img.shape[0] * normalize_img.shape[1])))
 	to_send = predicted.tolist()[0]
 	return jsonify({ "prediction": to_send }), 201
