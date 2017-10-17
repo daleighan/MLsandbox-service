@@ -1,14 +1,8 @@
 from flask import Flask, render_template, request, abort, jsonify
-from sklearn import datasets, svm, metrics
 from base64 import b64decode
-from numpy import min, max, floor, float, divide
+from numpy import min, max, floor, float
 from scipy.misc import imread, imresize
 from sklearn.externals import joblib
-from sklearn.preprocessing import normalize, scale
-from PIL import Image, ImageFilter
-from sklearn.datasets import fetch_mldata
-
-classifier = joblib.load('MNIST2_PICKLE.pkl')
 
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
@@ -34,16 +28,11 @@ def predict():
 
 	min_value = min(img)
 	max_value = max(img)
-	# normalize_img = floor(divide((img - min_value).astype(float),(max_value - min_value).astype(float)) * 1)
-	# normalize_img = normalize(img)
-	mnist = fetch_mldata('MNIST original', data_home='./server/MNIST_data')
-	for item in mnist:
-		print(item)
+	
+	classifier = joblib.load('MNIST_PICKLE.pkl')
 
-	normalize_img = img
-	predicted = classifier.predict(normalize_img.reshape((1,normalize_img.shape[0] * normalize_img.shape[1])))
+	predicted = classifier.predict(img.reshape((1,img.shape[0] * img.shape[1])))
 	to_send = predicted.tolist()[0]
-	print(predicted)
 	return jsonify({ "prediction": to_send }), 201
 
 if __name__ == "__main__":
