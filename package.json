@@ -8,8 +8,7 @@
   },
   "scripts": {
     "compile": "webpack --watch",
-    "start": "python server/MLService.py",
-    "train": "python models/numbermodel.py"
+    "start": "python server/MLService.py"
   },
   "author": "Alex Leigh",
   "license": "ISC",

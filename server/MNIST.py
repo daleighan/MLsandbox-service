@@ -10,6 +10,7 @@ def run():
 	mnist = fetch_mldata('MNIST original', data_home='./server/MNIST_data')
 	num_samples = len(mnist.data)
 	data = mnist.data.reshape(num_samples, -1)
+
 	print('Data reshaped')
 	# Create the model
 	# Support Vector Classifaction will be used
@@ -21,9 +22,6 @@ def run():
 	#save the modle with pickle
 	joblib.dump(classifier, 'MNIST_PICKLE.pkl')
 	print('pickle dump complete')
-
-	#clf = joblib.load('filename.pkl') use this to load data
-
 
 if __name__ == "__main__":
 	start_time = time.time()
