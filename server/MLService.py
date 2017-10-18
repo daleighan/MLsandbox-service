@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, abort, jsonify
 from base64 import b64decode
-from numpy import min, max, floor, float
+import numpy as np
 from scipy.misc import imread, imresize
 from sklearn.externals import joblib
 
@@ -25,9 +25,6 @@ def predict():
 	img = imread("image.jpg")
 	img = imresize(img, (28, 28))
 	img = img[:, :, 0]
-
-	min_value = min(img)
-	max_value = max(img)
 	
 	classifier = joblib.load('MNIST_PICKLE.pkl')
 

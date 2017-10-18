@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import DrawableCanvas from 'react-drawable-canvas'
 import Axios from 'axios'
+import bg from '../dist/bg.png'
 
 class Handwriting extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
       styles: {
-      	backgroundColor: 'black',
+      	backgroundImage: `url(${bg})`,
       	width: '400px',
       	height: '400px',
       	border: '1px solid black'
@@ -48,12 +49,12 @@ class Handwriting extends Component {
 					<DrawableCanvas
 						className='sketch'
 						brushColor='white'
-						lineWidth={18}
+						lineWidth={6}
 				/>
 				</div>
 				<div onClick={this.getPrediction} style={this.state.btn}>Get Prediction</div>
 				<div onClick={this.clearCanvas} style={this.state.btn}>Clear the Canvas</div>
-				<div>Current Prediction: {this.state.currentPrediction} </div>
+				<div>Current Prediction: {this.state.currentPrediction}</div>
 			</div>
 		)
 	}
