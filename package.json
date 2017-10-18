@@ -8,7 +8,7 @@
   },
   "scripts": {
     "compile": "webpack --watch",
-    "start": "python server/MLService.py"
+    "start": "python3 server/MLService.py"
   },
   "author": "Alex Leigh",
   "license": "ISC",
