@@ -12,7 +12,7 @@ app = Flask(__name__, static_folder="../static/dist", template_folder="../static
 def index():
   return render_template("index.html")
 
-# Set up a route for prediction
+# Set up a route for handwriting prediction
 @app.route("/api/numberpredict", methods=["POST"])
 def predict_number():
     if not request.json or not 'image' in request.json:
@@ -32,6 +32,7 @@ def predict_number():
     to_send = predicted.tolist()[0]
     return jsonify({ "prediction": to_send }), 201
 
+# Set up a route for housing price prediction
 @app.route("/api/houseprices", methods=["POST"])
 def predict_price():
     if not request or not 'info' in request.json: 
