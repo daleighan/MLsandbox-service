@@ -34,9 +34,15 @@ def predict_number():
 
 @app.route("/api/houseprices", methods=["POST"])
 def predict_price():
-    if not request.json:
+    if not request or not 'info' in request.json: 
         abort(400)
+    classifier = joblib.load('server/HOUSING_PICKLE.pkl') 
     
+    house_object = np.array(request.json["info"], dtype="float64")
+
+    predicted = classifier.predict([house_object])
+    to_send = predicted.tolist()[0]
+    return jsonify({ "prediction": to_send }), 201
 
 if __name__ == "__main__":
     app.run()
