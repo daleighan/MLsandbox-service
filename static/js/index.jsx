@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import DrawableCanvas from 'react-drawable-canvas'
-import Axios from 'axios'
-import bg from '../dist/bg.png'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import DrawableCanvas from 'react-drawable-canvas';
+import Axios from 'axios';
+import bg from '../dist/bg.png';
+import Housing from './housing.jsx';
 
 class Handwriting extends Component {
 	constructor(props) {
@@ -27,18 +28,18 @@ class Handwriting extends Component {
 	}
 
 	getPrediction = (e) => {
-		let canvas = document.getElementsByTagName('canvas')
-		let image = canvas[0].toDataURL('image/png')
-		let toSend = image.slice(22)
-		canvas[0].width = canvas[0].width
+		let canvas = document.getElementsByTagName('canvas');
+		let image = canvas[0].toDataURL('image/png');
+		let toSend = image.slice(22);
+		canvas[0].width = canvas[0].width;
 		Axios.post('/api/numberpredict', { image: toSend })
 		.then(response => this.setState({ currentPrediction: response.data.prediction }))
-		.catch(err => console.log(err))
+		.catch(err => console.log(err));
 	}
 
 	clearCanvas = (e) => {
-		let canvas = document.getElementsByTagName('canvas')
-		canvas[0].width = canvas[0].width
+		let canvas = document.getElementsByTagName('canvas');
+		canvas[0].width = canvas[0].width;
 	}
 
 	render = () => {
@@ -55,6 +56,7 @@ class Handwriting extends Component {
 				<div onClick={this.getPrediction} style={this.state.btn}>Get Prediction</div>
 				<div onClick={this.clearCanvas} style={this.state.btn}>Clear the Canvas</div>
 				<div>Current Prediction: {this.state.currentPrediction}</div>
+        <Housing />
 			</div>
 		)
 	}
