@@ -18,7 +18,25 @@ class Housing extends Component {
   }
   handleSubmit = () => {
     Axios.post('/api/houseprices', {
-     info: [] 
+      info: ["2014", 
+        this.state.bedrooms, 
+        this.state.bathrooms,
+        this.state.livingSpace,
+        this.state.lotSize,
+        this.state.floors,
+        this.state.waterfront,
+        this.state.view,
+        this.state.condition,
+        this.state.grade,
+        this.state.livingSpace - this.state.basement,
+        this.state.basement,
+        this.state.yearBuilt,
+        this.state.yearRenovated,
+        "98178",
+        47.5112,
+        -122.257,
+        this.state.livingSpace,
+        this.state.lotSize] 
     }).then(results => console.log(results))
       .catch(err => console.log(err));
   }
