@@ -4,19 +4,12 @@ class Housing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bedrooms: 0,
-      bathrooms: 0,
-      livingSpace: 0,
-      lotSize: 0,
-      floors: 0,
-      waterfront: 0,
-      view: 0
     }
   }
   
-  handleInputChange(event) {
-    const value = event.target;
-    const name = target.name;
+  handleInputChange = (event) =>  {
+    const { value } = event.target;
+    const name = event.target.name;
 
     this.setState({
       [name]: value
@@ -65,6 +58,24 @@ class Housing extends Component {
         View
         <input
           name="view"
+          type="number"
+          onChange={this.handleInputChange}
+        />
+        Basement Size
+        <input
+          name="basement"
+          type="number"
+          onChange={this.handleInputChange}
+        />
+        Year Built
+        <input
+          name="yearBuilt"
+          type="number"
+          onChange={this.handleInputChange}
+        />
+        Year Renovated
+        <input
+          name="yearRenovated"
           type="number"
           onChange={this.handleInputChange}
         />
