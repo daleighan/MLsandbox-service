@@ -31,7 +31,7 @@ class Handwriting extends Component {
 		let image = canvas[0].toDataURL('image/png')
 		let toSend = image.slice(22)
 		canvas[0].width = canvas[0].width
-		Axios.post('/api/predict', { image: toSend })
+		Axios.post('/api/numberpredict', { image: toSend })
 		.then(response => this.setState({ currentPrediction: response.data.prediction }))
 		.catch(err => console.log(err))
 	}
