@@ -16,7 +16,13 @@ class Housing extends Component {
       [name]: value
     });
   }
-
+  handleSubmit = () => {
+    Axios.post('/api/houseprices', {
+     info: [] 
+    }).then(results => console.log(results))
+      .catch(err => console.log(err));
+  }
+    
   render() {
     return (
       <div>
@@ -92,6 +98,7 @@ class Housing extends Component {
           type="number"
           onChange={this.handleInputChange}
         />
+        <div onClick={this.handleSubmit} className="btn">Get Prediction</div>
       </div>
     )
   }
