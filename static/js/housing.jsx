@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 
 class Housing extends Component {
   constructor(props) {
@@ -76,6 +77,18 @@ class Housing extends Component {
         Year Renovated
         <input
           name="yearRenovated"
+          type="number"
+          onChange={this.handleInputChange}
+        />
+        Condition(between one and 5)
+        <input
+          name="condition"
+          type="number"
+          onChange={this.handleInputChange}
+        />
+        Grade(quality of housing between 1 and 10
+        <input
+          name="grade"
           type="number"
           onChange={this.handleInputChange}
         />
