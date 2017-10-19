@@ -3,6 +3,15 @@ from base64 import b64decode
 import numpy as np
 from scipy.misc import imread, imresize
 from sklearn.externals import joblib
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
+
+# Instantiate and train ChatBot
+chatbot = ChatBot("Tairy Greene")
+chatbot.set_trainer(ChatterBotCorpusTrainer)
+chatbot.train(
+    "chatterbot.corpus.english"
+)
 
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
@@ -10,7 +19,7 @@ app = Flask(__name__, static_folder="../static/dist", template_folder="../static
 # Serve the react app
 @app.route("/")
 def index():
-  return render_template("index.html")
+    return render_template("index.html")
 
 # Set up a route for handwriting prediction
 @app.route("/api/numberpredict", methods=["POST"])
