@@ -44,7 +44,11 @@ class Housing extends Component {
     }).then(results => console.log(results))
       .catch(err => console.log(err));
   }
-    
+
+  handleMapClick = (e) => {
+    console.log(e.target.value);
+  }
+
   render() {
     return (
       <div>
@@ -121,12 +125,15 @@ class Housing extends Component {
           onChange={this.handleInputChange}
         />
         <div onClick={this.handleSubmit} className="btn">Get Prediction</div>
-        <MapComponent 
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDx9k-qXJb388-GL6WYNp0anEOcZmMmOn0&v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-        />
+        <div>
+           <MapComponent 
+             onClick={this.handleMapClick}
+             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDx9k-qXJb388-GL6WYNp0anEOcZmMmOn0&v=3.exp&libraries=geometry,drawing,places"
+             loadingElement={<div style={{ height: `100%` }} />}
+             containerElement={<div style={{ height: `400px` }} />}
+             mapElement={<div style={{ height: `100%` }} />}
+           />
+        </div>
       </div>
     )
   }
@@ -134,10 +141,10 @@ class Housing extends Component {
 
 const MapComponent = withScriptjs(withGoogleMap((props) => 
   <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: -34.397, lng: 150.644}}
+    defaultZoom={11}
+    defaultCenter={{ lat: 47.5112, lng: -122.257 }}
   >
-    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
+    <Marker position={{ lat: 47.5112, lng: -122.27 }} />
   </GoogleMap>
 ))
 
