@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import mapKey from '../../mapsapi.js';
+import MapComponent from './MapComponent.jsx';
 
 class Housing extends Component {
   constructor(props) {
@@ -152,24 +153,5 @@ class Housing extends Component {
     )
   }
 }
-
-const MapComponent = withScriptjs(withGoogleMap((props) => 
-  <GoogleMap
-    onClick={props.handleMapClick.bind(this)}
-    options={{
-      mapTypeControl: false,
-      panControl: false,
-      streetViewControl: false,
-      gestureHandling: 'none',
-      zoomControl: false,
-      scrollwheel: false,
-      draggable: false
-    }}
-    defaultZoom={12}
-    defaultCenter={{ lat: 47.595582, lng: -122.249828 }}
-  >
-    <Marker position={{ lat: props.lat, lng: props.lng }} />
-  </GoogleMap>
-))
 
 export default Housing;
