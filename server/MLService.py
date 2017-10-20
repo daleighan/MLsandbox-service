@@ -8,13 +8,6 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 from sklearn.externals import joblib
 import logging
 
-TWITTER = {
-    "CONSUMER_KEY": "QmrWIRefJYGouAv1wksOaBcmB",
-    "CONSUMER_SECRET": "luF4QoJSQZtWvuWxdLKGi3EYRXc0fg82sOged3Au7UBRLq8R1O",
-    "ACCESS_TOKEN": "921140739634950144-6Keo7AqaV047HlwiCs4REv1kmWPOfds",
-    "ACCESS_TOKEN_SECRET": "yZb4x7wQKtcBHgQnTFA3p9rDuuVO8684tCbTbgPh9eLtB"
-}
-
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
 
