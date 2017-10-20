@@ -1,7 +1,9 @@
 lib
 node_modules
-/static/dist/bundle.js
+bundle.js
 .vimrc.swp
 .bashrc.swp
 .eslintrc.js
 /server/twitterbot/settings.py
+image.jpg
+mapsapi.js

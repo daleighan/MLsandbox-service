@@ -26,7 +26,7 @@ webpackConfig.module.loaders.push({
   options: { 
     presets: ['es2015', 'react'],  
     plugins: ['transform-class-properties'] 
-  },
+  }
 });
 
 webpackConfig.module.loaders.push({
