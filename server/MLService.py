@@ -59,6 +59,6 @@ def have_chat():
 if __name__ == "__main__":
     chatbot = ChatBot("Tairy Greene")
     chatbot.set_trainer(ChatterBotCorpusTrainer)
-    chatbot.train("chatterbot.corpus.english")
+    # chatbot.train("chatterbot.corpus.english")
     app.run()
     

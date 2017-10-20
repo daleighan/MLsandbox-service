@@ -4,6 +4,7 @@ import DrawableCanvas from 'react-drawable-canvas';
 import Axios from 'axios';
 import bg from '../dist/bg.png';
 import Housing from './housing.jsx';
+import Chatbot from './chatbot.jsx';
 
 class Handwriting extends Component {
 	constructor(props) {
@@ -45,7 +46,7 @@ class Handwriting extends Component {
 	render = () => {
 		return (
 			<div>
-				<div>Sketch a Number!</div>
+				{/* <div>Sketch a Number!</div>
 				<div className='drawing' style={this.state.styles}> 
 					<DrawableCanvas
 						className='sketch'
@@ -56,7 +57,8 @@ class Handwriting extends Component {
 				<div onClick={this.getPrediction} style={this.state.btn}>Get Prediction</div>
 				<div onClick={this.clearCanvas} style={this.state.btn}>Clear the Canvas</div>
 				<div>Current Prediction: {this.state.currentPrediction}</div>
-        <Housing />
+        <Housing /> */}
+				<Chatbot />
 			</div>
 		)
 	}
