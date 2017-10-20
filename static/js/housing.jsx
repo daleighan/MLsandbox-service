@@ -54,7 +54,6 @@ class Housing extends Component {
   }
 
   handleMapClick = (e) => {
-    console.log(e);
     this.setState({ lng: e.latLng.lng() }, () => {
       this.setState({ lat: e.latLng.lat() });
     });
@@ -159,7 +158,9 @@ const MapComponent = withScriptjs(withGoogleMap((props) =>
       mapTypeControl: false,
       panControl: false,
       streetViewControl: false,
-      zoomControl: false
+      gestureHandling: 'none',
+      zoomControl: false,
+      scrollwheel: false
     }}
     defaultZoom={13}
     defaultCenter={{ lat: 47.5112, lng: -122.257 }}
