@@ -7,21 +7,25 @@ class Housing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mapCenter: { lat: 59.95, lng: 30.33 },
-      zoom: 11,
-      lat: 47.5112,
-      lng: -122.27
+      lat: 46.615567,
+      lng: -122.177644
     }
   }
   
   handleInputChange = (event) =>  {
     const { value } = event.target;
     const name = event.target.name;
-
     this.setState({
       [name]: value
     });
   }
+
+  handleMapClick = (e) => {
+    this.setState({ lng: e.latLng.lng() }, () => {
+      this.setState({ lat: e.latLng.lat() });
+    });
+  }
+
   handleSubmit = () => {
     Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&sensor=false`)
     .then((result) => {
@@ -50,12 +54,6 @@ class Housing extends Component {
           this.state.lotSize] 
       }).then(results => console.log(results))
       .catch(err => console.log(err));
-    });
-  }
-
-  handleMapClick = (e) => {
-    this.setState({ lng: e.latLng.lng() }, () => {
-      this.setState({ lat: e.latLng.lat() });
     });
   }
 
@@ -142,8 +140,8 @@ class Housing extends Component {
              handleMapClick={this.handleMapClick}
              googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${mapKey}&v=3.exp&libraries=geometry,drawing,places`}
              loadingElement={<div style={{ height: `100%` }} />}
-             containerElement={<div style={{ height: `400px` }} />}
-             mapElement={<div style={{ height: `100%` }} />}
+             containerElement={<div style={{ height: `840px` }} />}
+             mapElement={<div style={{ height: `100%`, width: `80%` }} />}
            />
         </div>
       </div>
@@ -163,8 +161,8 @@ const MapComponent = withScriptjs(withGoogleMap((props) =>
       scrollwheel: false,
       draggable: false
     }}
-    defaultZoom={13}
-    defaultCenter={{ lat: 47.5112, lng: -122.257 }}
+    defaultZoom={12}
+    defaultCenter={{ lat: 47.595582, lng: -122.249828 }}
   >
     <Marker position={{ lat: props.lat, lng: props.lng }} />
   </GoogleMap>
