@@ -160,7 +160,8 @@ const MapComponent = withScriptjs(withGoogleMap((props) =>
       streetViewControl: false,
       gestureHandling: 'none',
       zoomControl: false,
-      scrollwheel: false
+      scrollwheel: false,
+      draggable: false
     }}
     defaultZoom={13}
     defaultCenter={{ lat: 47.5112, lng: -122.257 }}
