@@ -39,8 +39,8 @@ class Housing extends Component {
         this.state.yearBuilt,
         this.state.yearRenovated,
         "98178",
-        47.5112,
-        -122.257,
+        this.state.lat,
+        this.state.lng,
         this.state.livingSpace,
         this.state.lotSize] 
     }).then(results => console.log(results))
