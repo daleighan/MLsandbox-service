@@ -1,7 +1,8 @@
 lib
 node_modules
-/static/dist/bundle.js
+bundle.js
 .vimrc.swp
 .bashrc.swp
 .eslintrc.js
 image.jpg
+mapsapi.js

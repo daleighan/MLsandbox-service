@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import mapKey from '../../mapsapi.js';
 
 class Housing extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      mapCenter: { lat: 59.95, lng: 30.33 },
+      zoom: 11
     }
   }
   
@@ -117,9 +121,24 @@ class Housing extends Component {
           onChange={this.handleInputChange}
         />
         <div onClick={this.handleSubmit} className="btn">Get Prediction</div>
+        <MapComponent 
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDx9k-qXJb388-GL6WYNp0anEOcZmMmOn0&v=3.exp&libraries=geometry,drawing,places"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
       </div>
     )
   }
 }
+
+const MapComponent = withScriptjs(withGoogleMap((props) => 
+  <GoogleMap
+    defaultZoom={8}
+    defaultCenter={{ lat: -34.397, lng: 150.644}}
+  >
+    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
+  </GoogleMap>
+))
 
 export default Housing;
