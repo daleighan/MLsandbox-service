@@ -1,5 +1,5 @@
 from chatterbot import ChatBot
-from setings import TWITTER
+from settings import TWITTER
 import logging
 
 logging.basicConfig(level=logging.INFO)
