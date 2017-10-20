@@ -4,7 +4,7 @@ import DrawableCanvas from 'react-drawable-canvas';
 import Axios from 'axios';
 import bg from '../dist/bg.png';
 import Housing from './housing.jsx';
-import Chatbot from './chatbot.jsx';
+import Chatbot from './chatbot/chatbot.jsx';
 
 class Handwriting extends Component {
 	constructor(props) {
