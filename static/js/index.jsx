@@ -4,6 +4,7 @@ import DrawableCanvas from 'react-drawable-canvas';
 import Axios from 'axios';
 import bg from '../dist/bg.png';
 import Housing from './housing.jsx';
+import Chatbot from './chatbot/chatbot.jsx';
 
 class Handwriting extends Component {
 	constructor(props) {
@@ -57,6 +58,7 @@ class Handwriting extends Component {
 				<div onClick={this.clearCanvas} style={this.state.btn}>Clear the Canvas</div>
 				<div>Current Prediction: {this.state.currentPrediction}</div>
         <Housing />
+				<Chatbot />
 			</div>
 		)
 	}

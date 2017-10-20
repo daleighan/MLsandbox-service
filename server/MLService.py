@@ -56,9 +56,19 @@ def have_chat():
     message_response = str(chatbot.get_response(request.json["message"]))
     return jsonify({ "response": message_response}), 201
 
+@app.after_request
+def add_header(response):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response    
+
 if __name__ == "__main__":
     chatbot = ChatBot("Tairy Greene")
     chatbot.set_trainer(ChatterBotCorpusTrainer)
-    chatbot.train("chatterbot.corpus.english")
+    # chatbot.train("chatterbot.corpus.english")
     app.run()
     
