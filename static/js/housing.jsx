@@ -9,7 +9,7 @@ class Housing extends Component {
     this.state = {
       lat: 46.615567,
       lng: -122.177644,
-      currentPrediction:'none'
+      currentPrediction: 'none'
     }
   }
   
@@ -137,7 +137,7 @@ class Housing extends Component {
           onChange={this.handleInputChange}
         />
         <div onClick={this.handleSubmit} className="btn">Get Prediction</div>
-        <div>
+        <div>Current Prediction: {this.state.currentPrediction}
           <MapComponent
              lat={this.state.lat}
              lng={this.state.lng}
