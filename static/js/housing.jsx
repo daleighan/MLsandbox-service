@@ -8,7 +8,8 @@ class Housing extends Component {
     super(props);
     this.state = {
       lat: 46.615567,
-      lng: -122.177644
+      lng: -122.177644,
+      currentPrediction:'none'
     }
   }
   
@@ -29,7 +30,10 @@ class Housing extends Component {
   handleSubmit = () => {
     Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&sensor=false`)
     .then((result) => {
-      let addy = result.data.results[0].formatted_address;
+      let addy = '98105, USA';
+      if (result.data.results[0]){
+        addy = result.data.results[0].formatted_address;
+      }
       let zip = addy.slice(addy.length - 10, addy.length - 5);
       console.log(zip);   
       Axios.post('/api/houseprices', {
@@ -52,9 +56,9 @@ class Housing extends Component {
           this.state.lng,
           this.state.livingSpace,
           this.state.lotSize] 
-      }).then(results => console.log(results))
+      }).then(results => this.setState({ currentPrediction: results.data.prediction }))
       .catch(err => console.log(err));
-    });
+    })
   }
 
   render() {
