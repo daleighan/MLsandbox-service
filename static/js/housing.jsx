@@ -23,28 +23,34 @@ class Housing extends Component {
     });
   }
   handleSubmit = () => {
-    Axios.post('/api/houseprices', {
-      info: ["2014", 
-        this.state.bedrooms, 
-        this.state.bathrooms,
-        this.state.livingSpace,
-        this.state.lotSize,
-        this.state.floors,
-        this.state.waterfront,
-        this.state.view,
-        this.state.condition,
-        this.state.grade,
-        this.state.livingSpace - this.state.basement,
-        this.state.basement,
-        this.state.yearBuilt,
-        this.state.yearRenovated,
-        "98178",
-        this.state.lat,
-        this.state.lng,
-        this.state.livingSpace,
-        this.state.lotSize] 
-    }).then(results => console.log(results))
+    Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&sensor=false`)
+    .then((result) => {
+      let addy = result.data.results[0].formatted_address;
+      let zip = addy.slice(addy.length - 10, addy.length - 5);
+      console.log(zip);   
+      Axios.post('/api/houseprices', {
+        info: ["2014", 
+          this.state.bedrooms, 
+          this.state.bathrooms,
+          this.state.livingSpace,
+          this.state.lotSize,
+          this.state.floors,
+          this.state.waterfront,
+          this.state.view,
+          this.state.condition,
+          this.state.grade,
+          this.state.livingSpace - this.state.basement,
+          this.state.basement,
+          this.state.yearBuilt,
+          this.state.yearRenovated,
+          zip,
+          this.state.lat,
+          this.state.lng,
+          this.state.livingSpace,
+          this.state.lotSize] 
+      }).then(results => console.log(results))
       .catch(err => console.log(err));
+    });
   }
 
   handleMapClick = (e) => {
