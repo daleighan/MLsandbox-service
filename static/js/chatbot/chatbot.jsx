@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Messages from './messages.jsx';
+import axios from 'axios';
 
 class Chatbot extends Component {
   constructor(props) {
@@ -8,20 +9,34 @@ class Chatbot extends Component {
       messages:[
         {
           from: "Chat R. Bot",
-          text: "Hi!  I'm Chat R. Bot.  What's your name?"
+          message: "Hi!  I'm Chat R. Bot.  What's your name?"
         }
       ]
     }
   }
 
+  getResponse(message) {
+    axios.post('/api/tairygreene', {message}).then((result) => {
+      let response = {
+        message: result.data.response,
+        from: "Chat R. Bot",
+      }
+      this.setState({messages: [...this.state.messages, response]})      
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
   handleSubmit (event) {
-    const text = event.target.value;
-    if (event.key == 'Enter' && text) {
-      const message = {
-        text,
+    const message = event.target.value;
+    if (event.key == 'Enter' && message) {
+      const query = {
+        message,
         from: 'user',
       }
-      this.setState({messages: [...this.state.messages, message]})
+      this.setState({messages: [...this.state.messages, query]}, () => {
+        this.getResponse(query.message)
+      })
       event.target.value = '';
     }
   }
@@ -34,8 +49,8 @@ class Chatbot extends Component {
           messages={this.state.messages}
         />
         </ul>
-        <div className="geosuggest__input-wrapper">
-          <input className='geosuggest__input' id='bio-input' type="text" placeholder='Enter a message...' onKeyUp={this.handleSubmit.bind(this)}/>
+        <div className="user_input-wrapper">
+          <input className='user_input' type="text" placeholder='Enter a message...' onKeyUp={this.handleSubmit.bind(this)}/>
         </div>
       </div>
     )
