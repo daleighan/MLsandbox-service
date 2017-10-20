@@ -4,4 +4,3 @@ node_modules
 .vimrc.swp
 .bashrc.swp
 .eslintrc.js
-/server/twitterbot/settings.py
