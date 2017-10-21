@@ -11,6 +11,11 @@ import logging
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
 
+# train chatterbot
+chatbot = ChatBot("Tairy Greene")
+chatbot.set_trainer(ChatterBotCorpusTrainer)
+chatbot.train("chatterbot.corpus.english")
+
 # Serve the react app
 @app.route("/")
 def index():
@@ -30,7 +35,7 @@ def predict_number():
     img = imresize(img, (28, 28))
     img = img[:, :, 0]
 
-    classifier = joblib.load("server/MNIST/MNIST_PICKLE.pkl")
+    classifier = joblib.load("MNIST/MNIST_PICKLE.pkl")
     
     predicted = classifier.predict(img.reshape((1,img.shape[0] * img.shape[1])))
     to_send = predicted.tolist()[0]
@@ -41,7 +46,7 @@ def predict_number():
 def predict_price():
     if not request or not "info" in request.json: 
         abort(400)
-    classifier = joblib.load("server/housing/HOUSING_PICKLE.pkl") 
+    classifier = joblib.load("housing/HOUSING_PICKLE.pkl") 
     
     house_object = np.array(request.json["info"], dtype="float64")
 
@@ -67,8 +72,5 @@ def add_header(response):
     return response    
 
 if __name__ == "__main__":
-    chatbot = ChatBot("Tairy Greene")
-    chatbot.set_trainer(ChatterBotCorpusTrainer)
-    # chatbot.train("chatterbot.corpus.english")
     app.run()
     
