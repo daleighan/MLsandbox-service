@@ -24,6 +24,8 @@ def run():
 
     print (svc.score(x_test, y_test))
 
+    joblib.dump(svc, "MUSHROOM_PICKLE.pkl")
+
 if __name__ == "__main__":
     start_time = time.time()
     results = run()
