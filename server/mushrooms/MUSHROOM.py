@@ -1,16 +1,30 @@
 from sklearn.externals import joblib
 from sklearn.cross_validation import train_test_split
-from sklearn.ensemble import RandomForestClassfier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
 import pandas as pd 
+import time
 
 def run():
     mushroom_data = pd.read_csv("mushroom_data/mushroom_data.csv")
-    print("mushroom data loaded")
 
-    random_forest = RandomForestClassfier()
+    random_forest = RandomForestClassifier()
+    label_encoder = LabelEncoder()
+
+    for col in mushroom_data.columns:
+        mushroom_data[col] = label_encoder.fit_transform(mushroom_data[col])
 
     labels = mushroom_data["class"]
-    train1 = mushroom_data.drop(["class"])
+    train1 = mushroom_data.drop(["class"], axis=1)
 
-    x_train, x_test, y_train, y_test = train_test_split(train1, labels)
+    x_train, x_test, y_train, y_test = train_test_split(train1, labels, test_size = 0.2, random_state = 100)
 
+    random_forest.fit(x_train, y_train)
+
+    print (random_forest.score(x_test, y_test))
+
+if __name__ == "__main__":
+    start_time = time.time()
+    results = run()
+    end_time = time.time()
+    print("Total Running Time: ", end_time - start_time)
