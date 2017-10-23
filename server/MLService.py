@@ -49,10 +49,9 @@ def predict_price():
     classifier = joblib.load("server/housing/HOUSING_PICKLE.pkl") 
     
     house_object = np.array(request.json["info"], dtype="float64")
-    print(house_object)
 
-    predicted = classifier.predict([house_object])
-    to_send = predicted.tolist()[0]
+    prediction = classifier.predict([house_object])
+    to_send = prediction.tolist()[0]
     return jsonify({ "prediction": to_send }), 201
 
 @app.route("/api/mushrooms", methods=["POST"])
@@ -64,10 +63,8 @@ def predict_safety():
     mushroom = np.array(request.json["data"], dtype="float64")
 
     prediction = classifier.predict([mushroom])
-    print('prediction', prediction)
-    return jsonify({ "prediction": prediction}), 201
-
-    
+    to_send = prediction.tolist()[0]
+    return jsonify({ "prediction": to_send}), 201
 
 @app.route("/api/tairygreene", methods=["POST"])
 def have_chat():

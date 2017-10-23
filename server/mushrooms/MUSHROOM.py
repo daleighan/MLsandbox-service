@@ -15,6 +15,8 @@ def run():
     for col in mushroom_data.columns:
         mushroom_data[col] = label_encoder.fit_transform(mushroom_data[col])
 
+    mushroom_data.to_csv('mushroom_data/mushroom_data_encoded.csv')
+
     labels = mushroom_data["class"]
     train1 = mushroom_data.drop(["class"], axis=1)
 
