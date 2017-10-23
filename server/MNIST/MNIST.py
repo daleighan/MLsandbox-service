@@ -37,8 +37,7 @@ def run():
     print("Evaluating results...")
     print("Mean accuracy: \t", classifier.score(X_test, y_test))
 
-    joblib.dump(classifier, 'MNIST2_PICKLE.pkl')
-
+    joblib.dump(classifier, 'MNIST_PICKLE.pkl')
 
 if __name__ == "__main__":
     start_time = time.time()

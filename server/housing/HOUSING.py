@@ -11,10 +11,10 @@ def run():
     print("housing data loaded")
     
     regression = LinearRegression()
-    labels = housing_data['price']
+    labels = housing_data["price"]
     conv_dates = [1 if values == 2014 else 0 for values in housing_data.date]
-    housing_data['date'] = conv_dates
-    train1 = housing_data.drop(['id', 'price'], axis=1)
+    housing_data["date"] = conv_dates
+    train1 = housing_data.drop(["id", "price"], axis=1)
     # Splits the data into training and testing
     x_train, x_test, y_train, y_test = train_test_split(train1, labels, test_size = 0.1, random_state = 2)
     # Fitting the data 
@@ -22,7 +22,7 @@ def run():
     
     print(regression.score(x_test, y_test))
     
-    joblib.dump(regression, 'HOUSING_PICKLE.pkl')
+    joblib.dump(regression, "HOUSING_PICKLE.pkl")
     print("Dump Complete")
 
 if __name__ == "__main__":
