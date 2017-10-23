@@ -7,7 +7,7 @@ from sklearn.cross_validation import train_test_split
 from sklearn.externals import joblib
 
 def run():
-    housing_data = pd.read_csv("KC_HOUSING/kc_house_data.csv")
+    housing_data = pd.read_csv("kc_housing_data/kc_house_data.csv")
     print("housing data loaded")
     
     regression = LinearRegression()

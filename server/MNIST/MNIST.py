@@ -7,7 +7,7 @@ import time
 
 
 def run():
-    mnist = fetch_mldata('MNIST original', data_home='./server/MNIST_data')
+    mnist = fetch_mldata('MNIST original', data_home='./server/MNIST/MNIST_data')
     # Trunk the data
     n_train = 60000
     n_test = 10000
