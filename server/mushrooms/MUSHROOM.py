@@ -1,6 +1,7 @@
 from sklearn.externals import joblib
 from sklearn.cross_validation import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+# from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
 from sklearn.preprocessing import LabelEncoder
 import pandas as pd 
 import time
@@ -8,7 +9,7 @@ import time
 def run():
     mushroom_data = pd.read_csv("mushroom_data/mushroom_data.csv")
 
-    random_forest = RandomForestClassifier()
+    svc = SVC(gamma=.01)
     label_encoder = LabelEncoder()
 
     for col in mushroom_data.columns:
@@ -17,11 +18,11 @@ def run():
     labels = mushroom_data["class"]
     train1 = mushroom_data.drop(["class"], axis=1)
 
-    x_train, x_test, y_train, y_test = train_test_split(train1, labels, test_size = 0.2, random_state = 100)
+    x_train, x_test, y_train, y_test = train_test_split(train1, labels, test_size = 0.2)
 
-    random_forest.fit(x_train, y_train)
+    svc.fit(x_train, y_train)
 
-    print (random_forest.score(x_test, y_test))
+    print (svc.score(x_test, y_test))
 
 if __name__ == "__main__":
     start_time = time.time()
