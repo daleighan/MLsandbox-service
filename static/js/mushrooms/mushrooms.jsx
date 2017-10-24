@@ -66,144 +66,181 @@ class Mushrooms extends Component {
   render() {
     return (
       <div>
+        Cap Shape
         <Select
           name="capShape"
-          options={options.capShape}
+          options={options["cap-shape"]}
           onChange={this.handleSelect.bind(this, "capShape")}
           placeholder="select cap shape..."
           value={this.state.capShape}
         />
-        Cap Shape
-        <input 
-          name="capShape"
-          type="number"
-          onChange={this.handleInputChange}
-        />
         Cap Surface
-        <input
+        <Select
           name="capSurface"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["cap-surface"]}
+          onChange={this.handleSelect.bind(this, "capSurface")}
+          placeholder="select cap surface..."
+          value={this.state.capSurface}
         />
         Cap Color
-        <input
+        <Select
           name="capColor"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["cap-color"]}
+          onChange={this.handleSelect.bind(this, "capColor")}
+          placeholder="select cap color..."
+          value={this.state.capColor}
         />
         Bruises
-        <input
+        <Select
           name="bruises"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["bruises"]}
+          onChange={this.handleSelect.bind(this, "bruises")}
+          placeholder="select bruises..."
+          value={this.state.bruises}
         />
         Odor
-        <input
+        <Select
           name="odor"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["odor"]}
+          onChange={this.handleSelect.bind(this, "odor")}
+          placeholder="select odor..."
+          value={this.state.odor}
         />
         Gill Attachment
-        <input
+        <Select
           name="gillAttachment"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["gill-attachment"]}
+          onChange={this.handleSelect.bind(this, "gillAttachment")}
+          placeholder="select gill attachment..."
+          value={this.state.gillAttachment}
         />
         Gill Spacing
-        <input
+        <Select
           name="gillSpacing"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["gill-spacing"]}
+          onChange={this.handleSelect.bind(this, "gillSpacing")}
+          placeholder="select gill spacing..."
+          value={this.state.gillSpacing}
         />
         Gill Size
-        <input
+        <Select
           name="gillSize"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["gill-size"]}
+          onChange={this.handleSelect.bind(this, "gillSize")}
+          placeholder="select gill size..."
+          value={this.state.gillSize}
         />
         Gill Color
-        <input
+        <Select
           name="gillColor"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["gill-color"]}
+          onChange={this.handleSelect.bind(this, "gillColor")}
+          placeholder="select gill color..."
+          value={this.state.gillColor}
         />
         Stalk Shape
-        <input
+        <Select
           name="stalkShape"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["stalk-shape"]}
+          onChange={this.handleSelect.bind(this, "stalkShape")}
+          placeholder="select stalk shape..."
+          value={this.state.stalkShape}
         />
         Stalk Root
-        <input
+        <Select
           name="stalkRoot"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["stalk-root"]}
+          onChange={this.handleSelect.bind(this, "stalkRoot")}
+          placeholder="select stalk root..."
+          value={this.state.stalkRoot}
         />
         Stalk Surface Above Ring
-        <input
+        <Select
           name="stalkSurfaceAboveRing"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["stalk-surface-above-ring"]}
+          onChange={this.handleSelect.bind(this, "stalkSurfaceAboveRing")}
+          placeholder="select stalk surface above ring..."
+          value={this.state.stalkSurfaceAboveRing}
         />
         Stalk Surface Below Ring
-        <input
+        <Select
           name="stalkSurfaceBelowRing"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["stalk-surface-below-ring"]}
+          onChange={this.handleSelect.bind(this, "stalkSurfaceBelowRing")}
+          placeholder="select stalk surface below ring..."
+          value={this.state.stalkSurfaceBelowRing}
         />
         Stalk Color Above Ring
-        <input
+        <Select
           name="stalkColorAboveRing"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["stalk-color-above-ring"]}
+          onChange={this.handleSelect.bind(this, "stalkColorAboveRing")}
+          placeholder="select stalk color above ring..."
+          value={this.state.stalkColorAboveRing}
         />
         Stalk Color Below Ring
-        <input
+        <Select
           name="stalkColorBelowRing"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["stalk-color-below-ring"]}
+          onChange={this.handleSelect.bind(this, "stalkColorBelowRing")}
+          placeholder="select stalk color below ring..."
+          value={this.state.stalkColorBelowRing}
         />
         Veil Type
-        <input
+        <Select
           name="veilType"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["veil-type"]}
+          onChange={this.handleSelect.bind(this, "veilType")}
+          placeholder="select veil type..."
+          value={this.state.veilType}
         />
         Veil Color
-        <input
+        <Select
           name="veilColor"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["veil-color"]}
+          onChange={this.handleSelect.bind(this, "veilColor")}
+          placeholder="select veil color..."
+          value={this.state.veilColor}
         />
         Ring Number
-        <input
+        <Select
           name="ringNumber"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["ring-number"]}
+          onChange={this.handleSelect.bind(this, "ringNumber")}
+          placeholder="select ring number..."
+          value={this.state.ringNumber}
         />
         Ring Type
-        <input
+        <Select
           name="ringType"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["ring-type"]}
+          onChange={this.handleSelect.bind(this, "ringType")}
+          placeholder="select ring type..."
+          value={this.state.ringType}
         />
         Spore Print Color
-        <input
+        <Select
           name="sporePrintColor"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["spore-print-color"]}
+          onChange={this.handleSelect.bind(this, "sporePrintColor")}
+          placeholder="select spore print color..."
+          value={this.state.sporePrintColor}
         />
         Population
-        <input
+        <Select
           name="population"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["population"]}
+          onChange={this.handleSelect.bind(this, "population")}
+          placeholder="select population..."
+          value={this.state.population}
         />
         Habitat
-        <input
+        <Select
           name="habitat"
-          type="number"
-          onChange={this.handleInputChange}
+          options={options["habitat"]}
+          onChange={this.handleSelect.bind(this, "habitat")}
+          placeholder="select habitat..."
+          value={this.state.habitat}
         />
         <div onClick={this.handleSubmit} className="btn">Get Prediction</div>
         <div>Current Prediction: {this.state.currentPrediction}
