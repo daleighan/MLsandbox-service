@@ -1,10 +1,16 @@
-module.exports = {
-  capShape: [
-    {value: 0, label: "bell"},
-    {value: 2, label: "flat"},
-    {value: 1, label: "conical"},
-    {value: 3, label: "knobbed"},
-    {value: 4, label: "sunken"},
-    {value: 5, label: "convex"},
-  ]
+let key = require('./key.json');
+
+let options = {};
+
+for (var classifier in key) {
+  let selections = [];
+  for (var label in key[classifier]) {
+    selections.push({
+      value: key[classifier][label],
+      label,
+    })
+  }
+  options[classifier] = selections
 }
+
+module.exports = options;
