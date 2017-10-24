@@ -23,17 +23,16 @@ def get_MFCC(sr, audio):
     return features
 
 def run():
-    sourcepath = "pygender/test_data/AudioSet/male_clips"
+    sourcepath = "pygender/my_tests"
     modelpath = "pygender"
 
     gmm_files = [os.path.join(modelpath, fname) for fname in os.listdir(modelpath) if fname.endswith(".gmm")]
 
     models = [joblib.load("male.gmm"), joblib.load("female.gmm")]
-    print(models)
 
     genders = ["male", "female"]
     files = [os.path.join(sourcepath, f) for f in os.listdir(sourcepath) if f.endswith(".wav")]
-
+    print(files)
     for f in files:
         sr, audio  = read(f)
         features   = get_MFCC(sr,audio)

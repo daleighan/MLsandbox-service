@@ -11,6 +11,7 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 from sklearn.externals import joblib
 import logging
 import os
+
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
 
