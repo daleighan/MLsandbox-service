@@ -1,4 +1,7 @@
 from flask import Flask, render_template, request, abort, jsonify
+from sklearn import preprocessing
+import python_speech_features as mfcc
+from scipy.io.wavfile import read
 from base64 import b64decode
 import numpy as np
 from scipy.misc import imread, imresize
@@ -7,7 +10,7 @@ from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 from sklearn.externals import joblib
 import logging
-
+import os
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
 
@@ -16,6 +19,10 @@ chatbot = ChatBot("Tairy Greene")
 chatbot.set_trainer(ChatterBotCorpusTrainer)
 chatbot.train("chatterbot.corpus.english")
 
+def get_MFCC(sr, audio):
+   features = mfcc.mfcc(audio, sr, 0.025, 0.01, 13, appendEnergy=False)
+   features = preprocessing.scale(features)
+   return features
 # Serve the react app
 @app.route("/")
 def index():
@@ -60,6 +67,37 @@ def have_chat():
         abort(400)
     message_response = str(chatbot.get_response(request.json["message"]))
     return jsonify({ "response": message_response}), 201
+
+@app.route("/api/speech", methods=["POST"])
+def predict_speech():
+    #if not request in request.json:
+#        abort(400)  
+
+    sourcepath = "server/SPEECH/pygender/my_tests"
+    modelpath = "server/SPEECH/pygender"
+
+    gmm_files = [os.path.join(modelpath, fname) for fname in os.listdir(modelpath) if fname.endswith(".gmm")]
+
+    models = [joblib.load("server/SPEECH/male.gmm"), joblib.load("server/SPEECH/female.gmm")]
+
+    genders = ["male", "female"]
+    files = [os.path.join(sourcepath, f) for f in os.listdir(sourcepath) if f.endswith(".wav")]
+
+    to_send = ""
+
+    for f in files:
+        sr, audio  = read(f)
+        features   = get_MFCC(sr,audio)
+        scores     = None
+        log_likelihood = np.zeros(len(models)) 
+        for i in range(len(models)):
+            gmm    = models[i]  
+            scores = np.array(gmm.score(features))
+            log_likelihood[i] = scores.sum()
+        winner = np.argmax(log_likelihood)
+        to_send = str(genders[winner])
+       # print("\tdetected as - ", genders[winner],"\n\tscores:female ",log_likelihood[0],",male ", log_likelihood[1],"\n"
+    return jsonify({ "prediction": to_send}), 201
 
 @app.after_request
 def add_header(response):
