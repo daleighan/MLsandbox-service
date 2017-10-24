@@ -6,9 +6,6 @@ from sklearn.externals import joblib
 import numpy as np
 import time
 import os
-import warnings
-warnings.filterwarnings("ignore")
-
 
 def get_MFCC(sr, audio):
     features = mfcc.mfcc(audio, sr, 0.025, 0.01, 13, appendEnergy=False)
@@ -16,7 +13,7 @@ def get_MFCC(sr, audio):
     return features
 
 def run():
-    source = "pygender/train_data/youtube/male"
+    source = "pygender/train_data/youtube/female"
     dest = "pygender"
     files = [os.path.join(source, f) for f in os.listdir(source) if f.endswith('.wav')]
     
@@ -32,8 +29,9 @@ def run():
     
     gmm = GMM(n_components = 8, n_iter = 200, covariance_type='diag', n_init=3)
     gmm.fit(features)
-    
-    joblib.dump(gmm,"male.pkl")
+    picklefile = f.split("/")[-2].split(".wav")[0] + ".gmm"
+    # dumping the pickle file
+    joblib.dump(gmm, picklefile)
 
 if __name__ == "__main__":
     start_time = time.time()
