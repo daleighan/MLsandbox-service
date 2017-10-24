@@ -5,7 +5,7 @@ import Axios from 'axios';
 import bg from '../dist/bg.png';
 import Housing from './housing.jsx';
 import Chatbot from './chatbot/chatbot.jsx';
-import Mushrooms from './mushrooms.jsx';
+import Mushrooms from './mushrooms/mushrooms.jsx';
 
 class Handwriting extends Component {
 	constructor(props) {
