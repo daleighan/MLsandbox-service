@@ -16,9 +16,9 @@ import os
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
 
 # train chatterbot
-chatbot = ChatBot("Tairy Greene")
-chatbot.set_trainer(ChatterBotCorpusTrainer)
-chatbot.train("chatterbot.corpus.english")
+#chatbot = ChatBot("Tairy Greene")
+#chatbot.set_trainer(ChatterBotCorpusTrainer)
+#chatbot.train("chatterbot.corpus.english")
 
 def get_MFCC(sr, audio):
    features = mfcc.mfcc(audio, sr, 0.025, 0.01, 13, appendEnergy=False)
@@ -71,8 +71,8 @@ def have_chat():
 
 @app.route("/api/speech", methods=["POST"])
 def predict_speech():
-    #if not request in request.json:
-    #abort(400)  
+    #audio = b64decode(request.data.blob)
+    print(request.json["data"]["blobURL"])
     sourcepath = "server/SPEECH/pygender/my_tests/test3.wav"
     modelpath = "server/SPEECH/pygender"
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ReactMic } from 'react-mic';
+import Axios from 'axios';
 
 class VoiceRecognitionWrapper extends Component {
   constructor(props) {
@@ -17,8 +18,13 @@ class VoiceRecognitionWrapper extends Component {
     this.setState({ record: false });
   }
 
-  onStop(recordedBlob) {
-    console.log('recordedBlob is: ', recordedBlob);
+  onStop(blob) {
+    console.log('recordedBlob is: ', blob);
+    Axios.post('/api/speech', {
+      data: blob,
+      headers: { 'content-type': 'multipart/form-data' }
+    }).then(response => console.log(response))
+    .catch(err => console.log(err));
   }
 
   render = () => {
