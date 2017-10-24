@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, abort, jsonify
 from sklearn import preprocessing
 import python_speech_features as mfcc
 from scipy.io.wavfile import read
-from base64 import b64decode
+from base64 import b64encode, b64decode
 import numpy as np
 from scipy.misc import imread, imresize
 from sklearn.externals import joblib
@@ -71,8 +71,15 @@ def have_chat():
 
 @app.route("/api/speech", methods=["POST"])
 def predict_speech():
-    #audio = b64decode(request.data.blob)
-    print(request.json["data"]["blobURL"])
+    print(request.files["file"])
+
+    audio_data = request.files["file"].read()
+
+    filename = "audio.webm"
+
+    with open(filename, "wb") as f:
+    	f.write(audio_data)
+    
     sourcepath = "server/SPEECH/pygender/my_tests/test3.wav"
     modelpath = "server/SPEECH/pygender"
 

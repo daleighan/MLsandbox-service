@@ -20,8 +20,9 @@ class VoiceRecognitionWrapper extends Component {
 
   onStop(blob) {
     console.log('recordedBlob is: ', blob);
-    Axios.post('/api/speech', {
-      data: blob,
+    let formData = new FormData()
+    formData.append("file", blob.blob);
+    Axios.post('/api/speech', formData, {
       headers: { 'content-type': 'multipart/form-data' }
     }).then(response => console.log(response))
     .catch(err => console.log(err));
