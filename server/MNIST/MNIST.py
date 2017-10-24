@@ -7,7 +7,7 @@ import time
 
 
 def run():
-    mnist = fetch_mldata('MNIST original', data_home='./server/MNIST_data')
+    mnist = fetch_mldata('MNIST original', data_home='./server/MNIST/MNIST_data')
     # Trunk the data
     n_train = 60000
     n_test = 10000
@@ -37,8 +37,7 @@ def run():
     print("Evaluating results...")
     print("Mean accuracy: \t", classifier.score(X_test, y_test))
 
-    joblib.dump(classifier, 'MNIST2_PICKLE.pkl')
-
+    joblib.dump(classifier, 'MNIST_PICKLE.pkl')
 
 if __name__ == "__main__":
     start_time = time.time()

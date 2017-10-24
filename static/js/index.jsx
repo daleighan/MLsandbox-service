@@ -5,6 +5,7 @@ import Axios from 'axios';
 import bg from '../dist/bg.png';
 import Housing from './housing.jsx';
 import Chatbot from './chatbot/chatbot.jsx';
+import Mushrooms from './mushrooms.jsx';
 
 class Handwriting extends Component {
 	constructor(props) {
@@ -59,6 +60,7 @@ class Handwriting extends Component {
 				<div>Current Prediction: {this.state.currentPrediction}</div>
         <Housing />
 				<Chatbot />
+				<Mushrooms />
 			</div>
 		)
 	}

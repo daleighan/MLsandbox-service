@@ -35,7 +35,7 @@ def predict_number():
     img = imresize(img, (28, 28))
     img = img[:, :, 0]
 
-    classifier = joblib.load("MNIST/MNIST_PICKLE.pkl")
+    classifier = joblib.load("server/MNIST/MNIST_PICKLE.pkl")
     
     predicted = classifier.predict(img.reshape((1,img.shape[0] * img.shape[1])))
     to_send = predicted.tolist()[0]
@@ -46,13 +46,25 @@ def predict_number():
 def predict_price():
     if not request or not "info" in request.json: 
         abort(400)
-    classifier = joblib.load("housing/HOUSING_PICKLE.pkl") 
+    classifier = joblib.load("server/housing/HOUSING_PICKLE.pkl") 
     
     house_object = np.array(request.json["info"], dtype="float64")
 
-    predicted = classifier.predict([house_object])
-    to_send = predicted.tolist()[0]
+    prediction = classifier.predict([house_object])
+    to_send = prediction.tolist()[0]
     return jsonify({ "prediction": to_send }), 201
+
+@app.route("/api/mushrooms", methods=["POST"])
+def predict_safety():
+    if not request or not "data" in request.json:
+        abort(400)
+    classifier = joblib.load("server/mushrooms/MUSHROOM_PICKLE.pkl")
+
+    mushroom = np.array(request.json["data"], dtype="float64")
+
+    prediction = classifier.predict([mushroom])
+    to_send = prediction.tolist()[0]
+    return jsonify({ "prediction": to_send}), 201
 
 @app.route("/api/tairygreene", methods=["POST"])
 def have_chat():
