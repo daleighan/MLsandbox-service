@@ -5,7 +5,7 @@ import Axios from 'axios';
 import bg from '../dist/bg.png';
 import Housing from './housing.jsx';
 import Chatbot from './chatbot/chatbot.jsx';
-import VoiceRecognition from './voice.jsx';
+import VoiceRecognitionWrapper from './voice.jsx';
 
 class Handwriting extends Component {
 	constructor(props) {
@@ -60,7 +60,7 @@ class Handwriting extends Component {
 				<div>Current Prediction: {this.state.currentPrediction}</div>
         <Housing />
 				<Chatbot />
-        <VoiceRecognition />
+        <VoiceRecognitionWrapper />
 			</div>
 		)
 	}
