@@ -45,7 +45,7 @@ class Mushrooms extends Component {
         this.state.habitat,
       ]
     }).then((results) => {
-      results.data.prediciton ? this.state.currentPrediction = 'Poison x(' : this.state.currentPrediction = 'Edible :)'
+      results.data.prediction === 1 ? this.setState({currentPrediction: 'Poison x('}) : this.setState({currentPrediction: 'Edible :)'});
     }).catch((err) => {
       console.error(err);
     })
