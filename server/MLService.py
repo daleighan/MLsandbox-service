@@ -71,9 +71,8 @@ def have_chat():
 @app.route("/api/speech", methods=["POST"])
 def predict_speech():
     #if not request in request.json:
-#        abort(400)  
-
-    sourcepath = "server/SPEECH/pygender/my_tests"
+    #abort(400)  
+    sourcepath = "server/SPEECH/pygender/my_tests/test3.wav"
     modelpath = "server/SPEECH/pygender"
 
     gmm_files = [os.path.join(modelpath, fname) for fname in os.listdir(modelpath) if fname.endswith(".gmm")]
@@ -81,21 +80,20 @@ def predict_speech():
     models = [joblib.load("server/SPEECH/male.gmm"), joblib.load("server/SPEECH/female.gmm")]
 
     genders = ["male", "female"]
-    files = [os.path.join(sourcepath, f) for f in os.listdir(sourcepath) if f.endswith(".wav")]
+    file = os.path.join(sourcepath)
 
     to_send = ""
 
-    for f in files:
-        sr, audio  = read(f)
-        features   = get_MFCC(sr,audio)
-        scores     = None
-        log_likelihood = np.zeros(len(models)) 
-        for i in range(len(models)):
-            gmm    = models[i]  
-            scores = np.array(gmm.score(features))
-            log_likelihood[i] = scores.sum()
-        winner = np.argmax(log_likelihood)
-        to_send = str(genders[winner])
+    sr, audio  = read(file)
+    features   = get_MFCC(sr,audio)
+    scores     = None
+    log_likelihood = np.zeros(len(models)) 
+    for i in range(len(models)):
+        gmm    = models[i]  
+        scores = np.array(gmm.score(features))
+        log_likelihood[i] = scores.sum()
+    winner = np.argmax(log_likelihood)
+    to_send = str(genders[winner])
        # print("\tdetected as - ", genders[winner],"\n\tscores:female ",log_likelihood[0],",male ", log_likelihood[1],"\n"
     return jsonify({ "prediction": to_send}), 201
 
