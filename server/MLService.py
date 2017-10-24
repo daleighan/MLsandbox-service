@@ -11,6 +11,7 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 from sklearn.externals import joblib
 import logging
 import os
+import subprocess as sp
 
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
@@ -78,10 +79,13 @@ def predict_speech():
     filename = "audio.webm"
 
     with open(filename, "wb") as f:
-    	f.write(audio_data)
+    	f.write(audio_data)  
     
-    sourcepath = "server/SPEECH/pygender/my_tests/test3.wav"
-    modelpath = "server/SPEECH/pygender"
+    command = ["ffmpeg", "-i", "audio.webm", "-filter:a", "loudnorm", "audio.wav"]
+    os.system("ffmpeg -i audio.webm -filter:a loudnorm audio.wav")
+
+    sourcepath = "audio.wav"
+    #modelpath = "server/SPEECH/pygender"
 
     models = [joblib.load("server/SPEECH/male.gmm"), joblib.load("server/SPEECH/female.gmm")]
 
@@ -100,6 +104,8 @@ def predict_speech():
         scores = np.array(gmm.score(features))
         log_likelihood[i] = scores.sum()
     winner = np.argmax(log_likelihood)
+    print("winner :", winner)
+    print(log_likelihood)
     to_send = str(genders[winner])
     return jsonify({ "prediction": to_send}), 201
 
