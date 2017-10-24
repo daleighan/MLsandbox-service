@@ -81,11 +81,9 @@ def predict_speech():
     with open(filename, "wb") as f:
     	f.write(audio_data)  
     
-    command = ["ffmpeg", "-i", "audio.webm", "-filter:a", "loudnorm", "audio.wav"]
-    os.system("ffmpeg -i audio.webm -filter:a loudnorm audio.wav")
+    os.system("ffmpeg -i audio.webm -filter:a loudnorm audio.wav -f")
 
     sourcepath = "audio.wav"
-    #modelpath = "server/SPEECH/pygender"
 
     models = [joblib.load("server/SPEECH/male.gmm"), joblib.load("server/SPEECH/female.gmm")]
 

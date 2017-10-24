@@ -6,7 +6,8 @@ class VoiceRecognitionWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      record: false
+      record: false,
+      prediction: "none"
     }
   }
   
@@ -18,13 +19,12 @@ class VoiceRecognitionWrapper extends Component {
     this.setState({ record: false });
   }
 
-  onStop(blob) {
-    console.log('recordedBlob is: ', blob);
+  onStop = (blob) => {
     let formData = new FormData()
     formData.append("file", blob.blob);
     Axios.post('/api/speech', formData, {
       headers: { 'content-type': 'multipart/form-data' }
-    }).then(response => console.log(response))
+    }).then(response => this.setState({prediction: response.data.prediction}))
     .catch(err => console.log(err));
   }
 
@@ -40,6 +40,7 @@ class VoiceRecognitionWrapper extends Component {
         />
         <button onClick={this.startRecording} type="button">Start</button>
         <button onClick={this.stopRecording} type="button">Stop</button>
+        <div>Prediction: {this.state.prediction}</div>
       </div>
     )
   }
