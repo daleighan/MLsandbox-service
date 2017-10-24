@@ -35,13 +35,12 @@ def run():
     files = [os.path.join(sourcepath, f) for f in os.listdir(sourcepath) if f.endswith(".wav")]
 
     for f in files:
-        #print(f.split("\\")[-1])
         sr, audio  = read(f)
         features   = get_MFCC(sr,audio)
         scores     = None
         log_likelihood = np.zeros(len(models)) 
         for i in range(len(models)):
-            gmm    = models[i]         #checking with each model one by one
+            gmm    = models[i]  
             scores = np.array(gmm.score(features))
             log_likelihood[i] = scores.sum()
         winner = np.argmax(log_likelihood)
