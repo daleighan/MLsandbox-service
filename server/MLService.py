@@ -75,26 +75,24 @@ def predict_speech():
     sourcepath = "server/SPEECH/pygender/my_tests/test3.wav"
     modelpath = "server/SPEECH/pygender"
 
-    gmm_files = [os.path.join(modelpath, fname) for fname in os.listdir(modelpath) if fname.endswith(".gmm")]
-
     models = [joblib.load("server/SPEECH/male.gmm"), joblib.load("server/SPEECH/female.gmm")]
 
     genders = ["male", "female"]
+
     file = os.path.join(sourcepath)
 
     to_send = ""
 
-    sr, audio  = read(file)
-    features   = get_MFCC(sr,audio)
-    scores     = None
+    sr, audio = read(file)
+    features = get_MFCC(sr,audio)
+    scores = None
     log_likelihood = np.zeros(len(models)) 
     for i in range(len(models)):
-        gmm    = models[i]  
+        gmm = models[i]  
         scores = np.array(gmm.score(features))
         log_likelihood[i] = scores.sum()
     winner = np.argmax(log_likelihood)
     to_send = str(genders[winner])
-       # print("\tdetected as - ", genders[winner],"\n\tscores:female ",log_likelihood[0],",male ", log_likelihood[1],"\n"
     return jsonify({ "prediction": to_send}), 201
 
 @app.after_request
