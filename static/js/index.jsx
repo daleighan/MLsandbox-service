@@ -6,6 +6,7 @@ import bg from '../dist/bg.png';
 import Housing from './housing.jsx';
 import Chatbot from './chatbot/chatbot.jsx';
 import VoiceRecognitionWrapper from './voice.jsx';
+import Mushrooms from './mushrooms/mushrooms.jsx';
 
 class Handwriting extends Component {
 	constructor(props) {
@@ -61,6 +62,7 @@ class Handwriting extends Component {
         <Housing />
 				<Chatbot />
         <VoiceRecognitionWrapper />
+				<Mushrooms />
 			</div>
 		)
 	}
