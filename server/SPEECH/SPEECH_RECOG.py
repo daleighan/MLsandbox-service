@@ -12,11 +12,11 @@ def get_MFCC(sr, audio):
     features = preprocessing.scale(features)
     return features
 
-def run():
-    source = "pygender/train_data/youtube/female"
+def run(): 
+    source = "pygender/train_data/youtube/male"
     dest = "pygender"
     files = [os.path.join(source, f) for f in os.listdir(source) if f.endswith('.wav')]
-    
+
     features = np.asarray(())
     
     for f in files:
