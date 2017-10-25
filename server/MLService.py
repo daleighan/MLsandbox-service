@@ -16,7 +16,7 @@ import subprocess as sp
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
 
-train chatterbot
+# Train chatterbot
 chatbot = ChatBot("Tairy Greene")
 chatbot.set_trainer(ChatterBotCorpusTrainer)
 chatbot.train("chatterbot.corpus.english")
@@ -90,6 +90,7 @@ def predict_speech():
     features = get_MFCC(sr,audio)
     scores = None
     log_likelihood = np.zeros(len(models)) 
+
     for i in range(len(models)):
         gmm = models[i]  
         scores = np.array(gmm.score(features))
