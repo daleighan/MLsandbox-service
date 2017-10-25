@@ -16,10 +16,10 @@ import subprocess as sp
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
 
-# train chatterbot
-#chatbot = ChatBot("Tairy Greene")
-#chatbot.set_trainer(ChatterBotCorpusTrainer)
-#chatbot.train("chatterbot.corpus.english")
+train chatterbot
+chatbot = ChatBot("Tairy Greene")
+chatbot.set_trainer(ChatterBotCorpusTrainer)
+chatbot.train("chatterbot.corpus.english")
 
 def get_MFCC(sr, audio):
    features = mfcc.mfcc(audio, sr, 0.025, 0.01, 13, appendEnergy=False)
@@ -72,21 +72,14 @@ def have_chat():
 
 @app.route("/api/speech", methods=["POST"])
 def predict_speech():
-    print(request.files["file"])
-
-    audio_data = request.files["file"].read()
-
-    filename = "audio.wav"
-
-    with open(filename, "wb") as f:
-    	f.write(audio_data)  
     
-    #os.system('ffmpeg -i audio.webm -filter:a loudnorm audio.wav -y')
+    audio_data = request.files["file"].read()
+    filename = "audio.wav"
+    with open(filename, "wb") as f:
+    	f.write(audio_data)   
 
     sourcepath = "audio.wav"
-
     models = [joblib.load("server/SPEECH/male.gmm"), joblib.load("server/SPEECH/female.gmm")]
-
     genders = ["male", "female"]
 
     file = os.path.join(sourcepath)
@@ -102,8 +95,6 @@ def predict_speech():
         scores = np.array(gmm.score(features))
         log_likelihood[i] = scores.sum()
     winner = np.argmax(log_likelihood)
-    print("winner :", winner)
-    print(log_likelihood)
     to_send = str(genders[winner])
     return jsonify({ "prediction": to_send}), 201
 

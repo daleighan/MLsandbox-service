@@ -56,6 +56,7 @@ class VoiceRecognitionWrapper extends Component {
           }).then(response => {
             this.setState({prediction: response.data.prediction})
             console.log(response);
+            audioContext.close();
           })
             .catch(err => console.log(err));
         }).catch(err => console.log(err));
