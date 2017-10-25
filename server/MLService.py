@@ -76,12 +76,12 @@ def predict_speech():
 
     audio_data = request.files["file"].read()
 
-    filename = "audio.webm"
+    filename = "audio.wav"
 
     with open(filename, "wb") as f:
     	f.write(audio_data)  
     
-    os.system('ffmpeg -i audio.webm -filter:a loudnorm audio.wav -y')
+    #os.system('ffmpeg -i audio.webm -filter:a loudnorm audio.wav -y')
 
     sourcepath = "audio.wav"
 

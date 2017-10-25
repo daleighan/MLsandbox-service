@@ -44,13 +44,22 @@ class VoiceRecognitionWrapper extends Component {
     setTimeout(() => {
       recorder.start()
     }, 100);
+
     setTimeout(() => {
       recorder.stop()
         .then(({blob, buffer}) => {
-          blob = blob
-          console.log(blob);
+          blob = blob;
+          let formData = new FormData();
+          formData.append('file', blob);
+          Axios.post('/api/speech', formData, {
+            headers: { 'content-type': 'multipart/form-data' }
+          }).then(response => {
+            this.setState({prediction: response.data.prediction})
+            console.log(response);
+          })
+            .catch(err => console.log(err));
         }).catch(err => console.log(err));
-    }, 5000);
+    }, 2500);
   }
 
   render = () => {
