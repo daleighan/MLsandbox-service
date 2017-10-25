@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ReactMic } from 'react-mic';
 import Axios from 'axios';
+import Recorder from 'recorder-js';
 
 class VoiceRecognitionWrapper extends Component {
   constructor(props) {
@@ -28,6 +29,30 @@ class VoiceRecognitionWrapper extends Component {
     .catch(err => console.log(err));
   }
 
+  recordAndSubmit = () => {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();  
+    const recorder = new Recorder(audioContext, {
+      onAnalysed: data => {},
+    });
+    let isRecordeing = false;
+    let blob = null;
+    
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => recorder.init(stream))
+      .catch(err => console.log(err));
+    
+    setTimeout(() => {
+      recorder.start()
+    }, 100);
+    setTimeout(() => {
+      recorder.stop()
+        .then(({blob, buffer}) => {
+          blob = blob
+          console.log(blob);
+        }).catch(err => console.log(err));
+    }, 5000);
+  }
+
   render = () => {
     return (
       <div>
@@ -41,6 +66,9 @@ class VoiceRecognitionWrapper extends Component {
         <button onClick={this.startRecording} type="button">Start</button>
         <button onClick={this.stopRecording} type="button">Stop</button>
         <div>Prediction: {this.state.prediction}</div>
+        <div>Second Version:
+          <button onClick={this.recordAndSubmit}>Get new recording</button>
+        </div>
       </div>
     )
   }

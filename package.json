@@ -28,6 +28,7 @@
     "react-google-maps": "^9.0.1",
     "react-mic": "^9.0.0",
     "recompose": "^0.26.0",
+    "recorder-js": "^1.0.7",
     "url-loader": "^0.6.2",
     "webpack": "^3.7.1"
   }
