@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import DrawableCanvas from 'react-drawable-canvas';
-import Axios from 'axios';
+import axios from 'axios';
 import bg from '../dist/bg.png';
 import Housing from './housing.jsx';
 import Chatbot from './chatbot/chatbot.jsx';
@@ -35,7 +35,7 @@ class Handwriting extends Component {
 		let image = canvas[0].toDataURL('image/png');
 		let toSend = image.slice(22);
 		canvas[0].width = canvas[0].width;
-		Axios.post('/api/numberpredict', { image: toSend })
+		axios.post('/api/numberpredict', { image: toSend })
 		.then(response => this.setState({ currentPrediction: response.data.prediction }))
 		.catch(err => console.log(err));
 	}

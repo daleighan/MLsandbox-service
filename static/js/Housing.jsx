@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import mapKey from '../../mapsapi.js';
-import MapComponent from './MapComponent.jsx';
+import MapComponent from './MapComponent.js';
 
 class Housing extends Component {
   constructor(props) {

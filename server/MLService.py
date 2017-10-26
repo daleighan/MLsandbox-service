@@ -12,9 +12,11 @@ from sklearn.externals import joblib
 import logging
 import os
 import subprocess as sp
+from flask_cors import CORS
 
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
+CORS(app)
 
 # Train chatterbot
 chatbot = ChatBot("Tairy Greene")
@@ -29,6 +31,10 @@ def get_MFCC(sr, audio):
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/api", methods=["OPTIONS"])
+def okay():
+    return "okay request", 200
 
 # Set up a route for handwriting prediction
 @app.route("/api/numberpredict", methods=["POST"])
@@ -119,6 +125,8 @@ def add_header(response):
     """
     response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
     response.headers['Cache-Control'] = 'public, max-age=0'
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
     return response    
 
 if __name__ == "__main__":
