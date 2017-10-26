@@ -12,16 +12,16 @@ from sklearn.externals import joblib
 import logging
 import os
 import subprocess as sp
+from flask_cors import CORS
 
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
+CORS(app)
 
 # Train chatterbot
 chatbot = ChatBot("Tairy Greene")
 chatbot.set_trainer(ChatterBotCorpusTrainer)
 chatbot.train("chatterbot.corpus.english")
-
-
 
 def get_MFCC(sr, audio):
    features = mfcc.mfcc(audio, sr, 0.025, 0.01, 13, appendEnergy=False)
@@ -125,6 +125,8 @@ def add_header(response):
     """
     response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
     response.headers['Cache-Control'] = 'public, max-age=0'
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
     return response    
 
 if __name__ == "__main__":
