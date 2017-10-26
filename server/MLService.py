@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, abort, jsonify
-from base64 import b64decode
+from sklearn import preprocessing
+import python_speech_features as mfcc
+from scipy.io.wavfile import read
+from base64 import b64encode, b64decode
 import numpy as np
 from scipy.misc import imread, imresize
 from sklearn.externals import joblib
@@ -7,15 +10,21 @@ from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 from sklearn.externals import joblib
 import logging
+import os
+import subprocess as sp
 
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
 
-# train chatterbot
+# Train chatterbot
 chatbot = ChatBot("Tairy Greene")
 chatbot.set_trainer(ChatterBotCorpusTrainer)
 chatbot.train("chatterbot.corpus.english")
 
+def get_MFCC(sr, audio):
+   features = mfcc.mfcc(audio, sr, 0.025, 0.01, 13, appendEnergy=False)
+   features = preprocessing.scale(features)
+   return features
 # Serve the react app
 @app.route("/")
 def index():
@@ -72,6 +81,35 @@ def have_chat():
         abort(400)
     message_response = str(chatbot.get_response(request.json["message"]))
     return jsonify({ "response": message_response}), 201
+
+@app.route("/api/speech", methods=["POST"])
+def predict_speech():
+    
+    audio_data = request.files["file"].read()
+    filename = "audio.wav"
+    with open(filename, "wb") as f:
+    	f.write(audio_data)   
+
+    sourcepath = "audio.wav"
+    models = [joblib.load("server/SPEECH/male.gmm"), joblib.load("server/SPEECH/female.gmm")]
+    genders = ["male", "female"]
+
+    file = os.path.join(sourcepath)
+
+    to_send = ""
+
+    sr, audio = read(file)
+    features = get_MFCC(sr,audio)
+    scores = None
+    log_likelihood = np.zeros(len(models)) 
+
+    for i in range(len(models)):
+        gmm = models[i]  
+        scores = np.array(gmm.score(features))
+        log_likelihood[i] = scores.sum()
+    winner = np.argmax(log_likelihood)
+    to_send = str(genders[winner])
+    return jsonify({ "prediction": to_send}), 201
 
 @app.after_request
 def add_header(response):

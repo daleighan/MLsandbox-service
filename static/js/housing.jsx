@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import Axios from 'axios';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import mapKey from '../../mapsapi.js';
 import MapComponent from './MapComponent.jsx';
