@@ -21,6 +21,8 @@ chatbot = ChatBot("Tairy Greene")
 chatbot.set_trainer(ChatterBotCorpusTrainer)
 chatbot.train("chatterbot.corpus.english")
 
+
+
 def get_MFCC(sr, audio):
    features = mfcc.mfcc(audio, sr, 0.025, 0.01, 13, appendEnergy=False)
    features = preprocessing.scale(features)
@@ -29,6 +31,10 @@ def get_MFCC(sr, audio):
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/api", methods=["OPTIONS"])
+def okay():
+    return "okay request", 200
 
 # Set up a route for handwriting prediction
 @app.route("/api/numberpredict", methods=["POST"])
