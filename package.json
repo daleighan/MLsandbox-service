@@ -7,7 +7,6 @@
     "lib": "lib"
   },
   "scripts": {
-    "compile": "webpack --watch",
     "start": "python3 server/MLService.py"
   },
   "author": "Alex Leigh, Max Jacobs",
