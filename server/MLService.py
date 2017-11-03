@@ -1,18 +1,17 @@
 from flask import Flask, render_template, request, abort, jsonify
 from sklearn import preprocessing
-import python_speech_features as mfcc
-from scipy.io.wavfile import read
-from base64 import b64encode, b64decode
-import numpy as np
-from scipy.misc import imread, imresize
 from sklearn.externals import joblib
+from scipy.io.wavfile import read
+from scipy.misc import imread, imresize
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
-from sklearn.externals import joblib
+from base64 import b64encode, b64decode
+from flask_cors import CORS
+import python_speech_features as mfcc
+import numpy as np
+import subprocess as sp
 import logging
 import os
-import subprocess as sp
-from flask_cors import CORS
 
 # Instantiate the server
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
@@ -23,15 +22,18 @@ chatbot = ChatBot("Tairy Greene")
 chatbot.set_trainer(ChatterBotCorpusTrainer)
 chatbot.train("chatterbot.corpus.english")
 
+# Process audiofile to MFCC
 def get_MFCC(sr, audio):
    features = mfcc.mfcc(audio, sr, 0.025, 0.01, 13, appendEnergy=False)
    features = preprocessing.scale(features)
    return features
-# Serve the react app
+
+# Serve static page
 @app.route("/")
 def index():
     return render_template("index.html")
 
+# Handle initial connection
 @app.route("/api", methods=["OPTIONS"])
 def okay():
     return "okay request", 200
@@ -69,6 +71,7 @@ def predict_price():
     to_send = prediction.tolist()[0]
     return jsonify({ "prediction": to_send }), 201
 
+# Set up a route for mushroom prediciton
 @app.route("/api/mushrooms", methods=["POST"])
 def predict_safety():
     if not request or not "data" in request.json:
@@ -81,6 +84,7 @@ def predict_safety():
     to_send = prediction.tolist()[0]
     return jsonify({ "prediction": to_send}), 201
 
+# Set up chatbot route
 @app.route("/api/tairygreene", methods=["POST"])
 def have_chat():
     if not request or not "message" in request.json: 
@@ -88,6 +92,7 @@ def have_chat():
     message_response = str(chatbot.get_response(request.json["message"]))
     return jsonify({ "response": message_response}), 201
 
+# Set up voice rec route
 @app.route("/api/speech", methods=["POST"])
 def predict_speech():
     
@@ -121,10 +126,10 @@ def predict_speech():
 def add_header(response):
     """
     Add headers to both force latest IE rendering engine or Chrome Frame,
-    and also to cache the rendered page for 10 minutes.
+    and also to cache the rendered page
     """
     response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
-    response.headers['Cache-Control'] = 'public, max-age=0'
+    response.headers['Cache-Control'] = 'public, max-age=6000'
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
     return response    

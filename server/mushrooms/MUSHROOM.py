@@ -12,7 +12,6 @@ def run():
 
     svc = SVC(gamma=.01)
     label_encoder = LabelEncoder()
-
     key = {}
 
     for col in mushroom_data.columns:
@@ -24,16 +23,11 @@ def run():
         file.write(json.dumps(key))
 
     mushroom_data.to_csv('mushroom_data/mushroom_data_encoded.csv')
-
     labels = mushroom_data["class"]
     train1 = mushroom_data.drop(["class"], axis=1)
-
     x_train, x_test, y_train, y_test = train_test_split(train1, labels, test_size = 0.2)
 
     svc.fit(x_train, y_train)
-
-    print (svc.score(x_test, y_test))
-
     joblib.dump(svc, "MUSHROOM_PICKLE.pkl")
 
 if __name__ == "__main__":
