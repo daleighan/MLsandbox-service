@@ -1,10 +1,7 @@
 lib
 node_modules
-bundle.js
 .vimrc.swp
 .bashrc.swp
 .eslintrc.js
-/server/twitterbot/settings.py
 image.jpg
-mapsapi.js
 /server/SPEECH/pygender
