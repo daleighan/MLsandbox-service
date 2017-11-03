@@ -97,7 +97,7 @@ def predict_speech():
     	f.write(audio_data)   
 
     sourcepath = "audio.wav"
-    models = [joblib.load("server/SPEECH/male.gmm"), joblib.load("server/SPEECH/female.gmm")]
+    models = [joblib.load("server/speech/male.gmm"), joblib.load("server/speech/female.gmm")]
     genders = ["male", "female"]
 
     file = os.path.join(sourcepath)
