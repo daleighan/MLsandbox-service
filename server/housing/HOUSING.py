@@ -1,8 +1,8 @@
-import pandas as pd
-import time
 from sklearn.linear_model import LinearRegression
 from sklearn.cross_validation import train_test_split
 from sklearn.externals import joblib
+import pandas as pd
+import time
 
 def run():
     housing_data = pd.read_csv("kc_housing_data/kc_house_data.csv")

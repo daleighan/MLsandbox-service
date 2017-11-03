@@ -1,10 +1,9 @@
-import random
-from numpy import arange
 from sklearn.datasets import fetch_mldata
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.externals import joblib
+from numpy import arange
+import random
 import time
-
 
 def run():
     mnist = fetch_mldata('MNIST original', data_home='./server/MNIST/MNIST_data')
