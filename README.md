@@ -4,9 +4,9 @@
 This is a prediction service for the webapp found at ml-sandbox.io. It provides a REST API for 5 different services.
 
 ### Tech Stack
-*Python
-*Flask
-*Scikit Learn
+* Python
+* Flask
+* Scikit Learn
 
 ### Startup
 To start up this service:
