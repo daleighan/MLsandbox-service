@@ -17,7 +17,7 @@ gunicorn==19.7.1
 idna==2.6
 imread==0.6
 itsdangerous==0.24
-Jinja2==2.9.6
+Jinja2==2.11.3
 jsondatabase==0.1.7
 jsonpatch==1.10
 jsonpointer==1.9
